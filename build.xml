@@ -2,11 +2,11 @@
 <project name="labuenavida" default="build-local-with-trees" basedir=".">
 
 	<!-- Deploy variables -->
-	<property name="application.name" value="labuenavida" /> 	
-	<property name="application.contextName" value="${application.name}" /> 	
-	
+	<property name="application.name" value="labuenavida" />
+	<property name="application.contextName" value="${application.name}" />
+
 	<property name="binaries.directory" value="bin" />
-	<property name="resources.directory" value="${application.name}" />	
+	<property name="resources.directory" value="${application.name}" />
 	<property name="source.directory" value="src" />
 	<property name="properties.directory" value="properties"/>
 	<property name="library.dir" value="${application.name}/WEB-INF/lib" />
@@ -19,15 +19,15 @@
 			<include name="**/**/*.jar" />
 			<exclude name="source/**/*.jar" />
 		</fileset>
-		
+
 		<fileset dir="${library.dir}/server">
 			<include name="servlet-api.jar" />
 			<include name="jsp-api.jar" />
 		</fileset>
-		
+
 		<fileset dir="${java.home}/lib">
 			<include name="tools.jar" /> 
-		</fileset>		
+		</fileset>
 
 	</path>
 
@@ -54,7 +54,7 @@
 			<fileset dir="${properties.directory}"/>
 		</copy>	
 		<filter token="DEPLOY_PATH" value="${config.deploy.path}"/>
-	</target>	
+	</target>
 
 	<!-- configure files -->
 	<target name="configure-files" description="configure files">
@@ -95,16 +95,16 @@
 	<!-- local deploy with trees -->
 	<target name="build-local-with-trees">
 
-		    <property environment="env" />
-		    <property name="tomcat.home" value="${env.CATALINA_HOME}" />
+			<property environment="env" />
+			<property name="tomcat.home" value="${env.CATALINA_HOME}" />
 
-		    <property name="config.deploy.path" value="${tomcat.home}/webapps/${application.contextName}"/>
+			<property name="config.deploy.path" value="${tomcat.home}/webapps/${application.contextName}"/>
 			<property name="config.log.path" value="${tomcat.home}/logs/${application.contextName}"/>
 
 			<property name="deployment.directory" value="${tomcat.home}/webapps/${application.contextName}" />
 			<property name="config.dir" value="config/local" />
 			<property name="log.path" value="${tomcat.home}/logs/${application.contextName}"/>
-			
+
 			<antcall target="build" />
 			<copy todir="${deployment.directory}">
 				<fileset dir="${resources.directory}" includes="**/*.tree"/>
@@ -116,8 +116,8 @@
 	<!-- staging deploy -->
 	<target name="build-staging">
 
-        <property name="config.deploy.path" value="${project.deploy.path}"/>
-        <property name="config.log.path" value="${project.log.path}"/>
+		<property name="config.deploy.path" value="${project.deploy.path}"/>
+		<property name="config.log.path" value="${project.log.path}"/>
 
 		<property name="deployment.directory" value="target/dist" />
 		<property name="config.dir" value="config/staging" />
@@ -132,7 +132,7 @@
         <property name="config.log.path" value="${project.log.path}"/>
 	    
 		<property name="deployment.directory" value="target/dist" />
-		<property name="config.dir" value="config/prod" />		
+		<property name="config.dir" value="config/prod" />
 
 		<antcall target="build" />
 	</target>
