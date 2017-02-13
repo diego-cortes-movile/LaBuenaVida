@@ -1,0 +1,62 @@
+providersBundler {
+	class="com.compera.portal.processor.ProvidersBundlerProcessor"
+	url_rules="any"
+}
+
+deviceIdentifier {
+	class="com.compera.portal.processor.DeviceIdentifierProcessor"
+	default_user_agent="Mozilla/5.0 (Windows; U; Windows NT 5.1; pt-BR; rv:1.9.0.2) Gecko/2008091620 Firefox/3.0.2"
+	url_rules=[notMatches(".*\.(css|gif|jpg|jpeg|swf|flv|mp3|mp4|pdf|ico|png|js)")]
+}
+
+userIdentifier {
+	class="com.compera.portal.processor.UserIdentifierProcessor"
+	url_rules="any"
+	user_http_header_fields=["msisdn", "x-up-calling-line-id", "http_x_up_calling_line_id", "x-up-ch-msisdn", "X-Nokia-msisdn", "http_x_x509_subject", "http_x_wap_sesiones3g_mdn", "http_x_msisdn", "http_x_ani", "http_x_up_subno", "http_x_subno", "http_x_nokia_msisdn", "http_msisdn", "x_ztgo_beareraddress", "http_x_ztgo_beareraddress"]
+	carriers=carrier("tim", "200.179.66.238")
+}
+
+urlIdentifier {
+	class="com.compera.portal.processor.URLIdentifierProcessor"
+	order_rules=[after(deviceIdentifier), after(userIdentifier)]
+	url_rules="any"
+}
+
+reservedURLFilter {
+	class="com.compera.portal.processor.ReservedURLFilterProcessor"
+	order_rules=rightAfter(urlIdentifier)
+	url_rules="any"
+	reserved_urls=["portal/wap/","portal/smart/"]
+}
+
+nodeFinder {
+	class="com.compera.portal.processor.NodeFinderProcessor"
+	order_rules=[after(urlIdentifier), after(commonProviders)]
+	url_rules="any"
+	root=tree(root)
+}
+
+customized {
+	class="com.compera.portal.processor.CustomizedProcessor"
+	order_rules=[after(deviceIdentifier), after(userIdentifier), after(nodeFinder), after(channelHandler)]
+	url_rules="any"
+}
+
+templateHandler {
+	class="com.compera.portal.processor.TemplateHandlerProcessor"
+	order_rules=[after(deviceIdentifier), after(nodeFinder), after(channelHandler), after(customized)]
+	url_rules="any"
+}
+
+accessLogger {
+	class="com.compera.portal.processor.AccessLoggerProcessor"
+	order_rules="last"
+	url_rules=[notMatches("\Qmanager\E.*")]
+	previous_result_rules="any" 
+}
+
+googleAnalitycs {
+	class="com.movile.labuenavida.portal.processor.GoogleAnalyticsFilter"
+	order_rules=[after(deviceIdentifier), after(userIdentifier)]
+	url_rules=[notMatches(".*\.(css|gif|jpg|jpeg|swf|flv|mp3|mp4|pdf|ico|png|js)")]
+}

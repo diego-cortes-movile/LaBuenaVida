@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="labuenavida" default="build-local-with-trees" basedir=".">
+
+	<!-- Deploy variables -->
+	<property name="application.name" value="labuenavida" /> 	
+	<property name="application.contextName" value="${application.name}" /> 	
+	
+	<property name="binaries.directory" value="bin" />
+	<property name="resources.directory" value="${application.name}" />	
+	<property name="source.directory" value="src" />
+	<property name="properties.directory" value="properties"/>
+	<property name="library.dir" value="${application.name}/WEB-INF/lib" />
+
+	<!-- class path -->
+	<path id="classpath">
+
+		<fileset dir="${library.dir}">
+			<include name="**/*.jar" />
+			<include name="**/**/*.jar" />
+			<exclude name="source/**/*.jar" />
+		</fileset>
+		
+		<fileset dir="${library.dir}/server">
+			<include name="servlet-api.jar" />
+			<include name="jsp-api.jar" />
+		</fileset>
+		
+		<fileset dir="${java.home}/lib">
+			<include name="tools.jar" /> 
+		</fileset>		
+
+	</path>
+
+	<!-- complile -->
+	<target name="compile-bin">
+		<mkdir dir="${binaries.directory}" />
+		<javac srcdir="${source.directory}" destdir="${binaries.directory}" source="1.7" target="1.7" encoding="ISO-8859-1" debug="on" includeantruntime="false">
+			<classpath refid="classpath" /> 
+		</javac>
+	</target>
+
+	<!-- main deploy -->
+	<target name="build" depends="compile-bin">
+
+		<copy todir="${deployment.directory}">
+			<fileset dir="${resources.directory}">
+				<exclude name="config/"/>
+				<exclude name="**/*rt.jar" />
+			</fileset>
+		</copy>
+
+		<copy todir="${deployment.directory}/WEB-INF/classes">
+			<fileset dir="${binaries.directory}"/>
+			<fileset dir="${properties.directory}"/>
+		</copy>	
+		<filter token="DEPLOY_PATH" value="${config.deploy.path}"/>
+	</target>	
+
+	<!-- configure files -->
+	<target name="configure-files" description="configure files">
+
+        <echo>Configuring logback.xml</echo>
+        <replace file="${deployment.directory}/WEB-INF/classes/logback.xml" token="@{log.path}" value="${config.log.path}/" />
+
+        <echo>Configuring movile-sdk.properties</echo>
+        <replace file="${deployment.directory}/config/movile-sdk.properties" token="@{deploy.path}" value="${config.deploy.path}/" />
+
+		<echo>Configuring editor.processors</echo>
+		<replace file="${deployment.directory}/editor/editor.processors" token="@{log.path}" value="${config.log.path}/" />
+	</target>
+
+
+	<!-- ================ -->
+	<!--   BUILD TARGETS  -->
+	<!-- ================ -->
+
+
+	<!-- local deploy -->
+	<target name="build-local">
+
+		<property environment="env" />
+		<property name="tomcat.home" value="${env.CATALINA_HOME}" />
+
+		<property name="config.deploy.path" value="${tomcat.home}/webapps/${application.contextName}"/>
+		<property name="config.log.path" value="${tomcat.home}/logs/${application.contextName}"/>
+
+		<property name="deployment.directory" value="${tomcat.home}/webapps/${application.contextName}" />
+		<property name="config.dir" value="config/local" />
+		<property name="log.path" value="${tomcat.home}/logs/${application.contextName}"/>
+
+		<antcall target="build" />
+		<delete dir="${binaries.directory}"/>
+	</target>
+
+	<!-- local deploy with trees -->
+	<target name="build-local-with-trees">
+
+		    <property environment="env" />
+		    <property name="tomcat.home" value="${env.CATALINA_HOME}" />
+
+		    <property name="config.deploy.path" value="${tomcat.home}/webapps/${application.contextName}"/>
+			<property name="config.log.path" value="${tomcat.home}/logs/${application.contextName}"/>
+
+			<property name="deployment.directory" value="${tomcat.home}/webapps/${application.contextName}" />
+			<property name="config.dir" value="config/local" />
+			<property name="log.path" value="${tomcat.home}/logs/${application.contextName}"/>
+			
+			<antcall target="build" />
+			<copy todir="${deployment.directory}">
+				<fileset dir="${resources.directory}" includes="**/*.tree"/>
+			</copy>
+
+			<delete dir="${binaries.directory}"/>
+	</target>
+	
+	<!-- staging deploy -->
+	<target name="build-staging">
+
+        <property name="config.deploy.path" value="${project.deploy.path}"/>
+        <property name="config.log.path" value="${project.log.path}"/>
+
+		<property name="deployment.directory" value="target/dist" />
+		<property name="config.dir" value="config/staging" />
+
+		<antcall target="build" />
+	</target>
+
+	<!-- prod deploy -->
+	<target name="build-prod">
+
+        <property name="config.deploy.path" value="${project.deploy.path}"/>
+        <property name="config.log.path" value="${project.log.path}"/>
+	    
+		<property name="deployment.directory" value="target/dist" />
+		<property name="config.dir" value="config/prod" />		
+
+		<antcall target="build" />
+	</target>
+
+</project>

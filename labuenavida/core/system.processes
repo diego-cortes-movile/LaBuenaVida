@@ -1,0 +1,98 @@
+initiateProcess{
+	class="com.compera.portal.log.LogLoaderProcess"
+	directory=""
+	load_subfolders="true"
+	extension=".logs"
+	interval="20000"
+}
+
+logLoader {
+	class="com.compera.portal.log.LogLoaderProcess"
+	directory=""
+	load_subfolders="true"
+	extension=".logs"
+	interval="20000"
+}
+
+logConnectorLoader {
+	class="com.compera.portal.log.LogConnectorLoaderProcess"
+	directory=""
+	load_subfolders="true"
+	extension=".connectors"
+	interval="20000"
+}
+
+serviceLoader {
+	class="com.compera.portal.service.ServiceLoaderProcess"
+	directory=""
+	load_subfolders="true"
+	extension=".services"
+	interval="20000"
+	log="service.loader"
+}
+
+processorLoader {
+	class="com.compera.portal.processor.ProcessorLoaderProcess"
+	directory=""
+	load_subfolders="true"
+	extension=".processors"
+	interval="20000"
+	log="processor.loader"
+}
+
+deviceLoader {
+	class="com.compera.portal.device.DeviceLoaderProcess"
+	directory=""
+	load_subfolders="true"
+	extension=".devices"
+	interval="20000"
+	log="device.loader"
+}
+
+treeLoader {
+	class="com.compera.portal.tree.TreeLoaderProcess"
+	directory=""
+	load_subfolders="true"
+	extension=".tree"
+	interval="20000"
+	log="tree.loader"
+} 
+
+contentLoader {
+	class="com.compera.portal.content.ContentLoaderProcess"
+	directory=""
+	load_subfolders="true"
+	extension=".contents"
+	interval="20000"
+	log="content.loader"
+}
+
+contentFileLoader {
+	class="com.compera.portal.content.ContentFileLoaderProcess"
+	directory=""
+	load_subfolders="true"
+	extension=[".gif", ".jpg"]
+	interval="20000"
+	log="content.loader"
+}
+
+channelLoader {
+	class="com.compera.portal.channel.ChannelLoaderProcess"
+	directory=""
+	load_subfolders="true"
+	extension=".channel"
+	interval="20000"
+	log="channel.loader"
+} 
+
+templateLoader {
+	class="com.compera.portal.template.TemplateLoaderProcess"
+	directory=""
+	load_subfolders="true"
+	extension=".templates"
+	interval="20000"
+	log="template.loader"
+}
+
+
+		

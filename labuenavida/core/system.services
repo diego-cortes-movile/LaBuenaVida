@@ -1,0 +1,17 @@
+device {
+	wurfl {
+		class="com.compera.portal.device.WURFLDeviceProvider"
+	}
+}
+
+content {
+	class="com.compera.portal.content.DiskContentProvider"
+}
+
+tree {
+	class="com.compera.portal.tree.DiskTreeProvider"
+}
+
+channel {
+	class="com.compera.portal.channel.DiskChannelProvider"
+}

@@ -1,0 +1,9 @@
+channelLoader {
+    class="com.movile.mob.portal.channel.ChannelLoaderProcess"
+    application_ids=["1039"]
+    smartchannel_channelIds=["10264"]
+    smartchannel_modelIds=["46"]
+    chub_download_url="http://chub.ti.movile.com/cHub/api/dl/{0}"
+    chub_list_category_url="http://chub.ti.movile.com/cHub/api/list/categories/{0}"
+    chub_list_resources_url="http://chub.ti.movile.com/cHub/api/list/resources/{0}"
+}

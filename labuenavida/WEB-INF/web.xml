@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app version="2.4">
+	<display-name>labuenavida</display-name>
+	<description>La Buena Vida</description>
+
+	<listener>
+		<listener-class>
+			net.sourceforge.wurfl.core.web.WURFLServletContextListener
+		</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>wurfl</param-name>
+		<param-value>/WEB-INF/wurfl.zip</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>basicProperties</param-name>
+		<param-value>basic.properties</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>
+			com.compera.portal.servlet.ApplicationServerListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			com.movile.labuenavida.listener.LaBuenaVidaContextListener
+		</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>LogFilter</filter-name>
+		<filter-class>com.movile.labuenavida.filter.LogFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>LogFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>RequestGateway</filter-name>
+		<filter-class>com.compera.portal.servlet.RequestGateway</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>RequestGateway</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>

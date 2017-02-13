@@ -1,0 +1,8 @@
+wap {
+	redirect=tree("wap")
+}
+smart {
+	redirect=tree("smart")
+}
+redirect=wap
+

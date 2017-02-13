@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<description>Portal 2</description>
+	<short-name>channel</short-name>
+
+  	<function>
+		<name>image</name>
+		<function-class>com.compera.portal.taglib.ImageFunctions</function-class>
+		<function-signature>
+			java.lang.String getImage(javax.servlet.jsp.PageContext, com.compera.portal.property.Property, java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+
+ 	<function>
+		<name>imageResized</name>
+		<function-class>com.compera.portal.taglib.ImageFunctions</function-class>
+		<function-signature>
+			java.lang.String getResizedImage(javax.servlet.jsp.PageContext, com.compera.portal.property.Property, java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+
+  	<function>
+		<name>child</name>
+		<function-class>com.compera.portal.taglib.TreeFunctions</function-class>
+		<function-signature>
+			com.compera.portal.tree.Tree getChild(com.compera.portal.tree.Tree, java.lang.String)
+		</function-signature>
+	</function>
+  	
+  	<function>
+		<name>tree</name>
+		<function-class>com.compera.portal.taglib.TreeFunctions</function-class>
+		<function-signature>
+			com.compera.portal.tree.Tree getTree(java.lang.String)
+		</function-signature>
+	</function>
+	
+  	<function>
+		<name>channel</name>
+		<function-class>com.compera.portal.taglib.ChannelFunctions</function-class>
+		<function-signature>
+			com.compera.portal.channel.Channel getChannel(com.compera.portal.property.Property)
+		</function-signature>
+	</function>
+
+  	<function>
+		<name>elementURL</name>
+		<function-class>com.compera.portal.taglib.ChannelFunctions</function-class>
+		<function-signature>
+			java.lang.String getChannelElementURL(com.compera.portal.property.Property, com.compera.portal.channel.ChannelElement)
+		</function-signature>
+	</function>
+
+  	<function>
+		<name>elementURLByName</name>
+		<function-class>com.compera.portal.taglib.ChannelFunctions</function-class>
+		<function-signature>
+			java.lang.String getChannelElementURL(com.compera.portal.channel.ChannelElement)
+		</function-signature>
+	</function>
+
+  	<function>
+		<name>property</name>
+		<function-class>com.compera.portal.taglib.PageFunctions</function-class>
+		<function-signature>
+			com.compera.portal.property.Property getProperty(com.compera.portal.property.PropertiesContainer, java.lang.String)
+		</function-signature>
+	</function>
+	
+  	<function>
+		<name>nodesByProperty</name>
+		<function-class>com.compera.portal.taglib.TreeFunctions</function-class>
+		<function-signature>
+			java.util.Collection filterNodesByProperty(java.util.Collection, java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+
+  	<function>
+		<name>absoluteURL</name>
+		<function-class>com.compera.portal.taglib.URLFunctions</function-class>
+		<function-signature>
+			java.lang.String getAbsoluteURL(java.lang.String)
+		</function-signature>
+	</function>
+	
+	<function>
+		<name>convertToWML</name>
+		<function-class>com.compera.portal.taglib.PageFunctions</function-class>
+		<function-signature>
+			java.lang.String convertToWML(java.lang.String)
+		</function-signature>
+	</function>
+
+	<tag>
+		<name>no-cache</name>
+		<tag-class>com.compera.portal.taglib.NoCache</tag-class>
+		<body-content>EMPTY</body-content>
+  	</tag>	
+</taglib>

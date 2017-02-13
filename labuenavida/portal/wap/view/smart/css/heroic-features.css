@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,700');
+
+
+body {
+    padding-top: 0;  
+	background-color: #27104c;
+	color: #fff;
+	font-family: 'Josefin Sans', sans-serif;
+	font-weight: 400;
+}
+
+a{ color: #fff;}
+.hero-spacer {
+    margin-top: 20px;
+}
+
+.hero-feature {
+    margin-bottom: 30px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.logo{
+	border-bottom: 0.5px solid #b725a9;
+	text-align: center;
+	width: 100%;
+	background-color: #41145b;
+	 background: url(../img/header.jpg) top center no-repeat;
+	background-size: cover;
+	    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logo img{ width: 30%; height: auto; margin:0 20px; 
+ }
+
+.navbar-header{
+	background-color: #2029bd;
+}
+
+video{
+	width: 100%;
+}
+.jumbotron {
+    padding: 20px 10px;
+    margin: 0;
+    color: inherit;
+	border-radius: 0px;
+	/*background: url(../img/video.jpg) center no-repeat;
+	background-size: cover;*/
+    background-color: #63079d;   
+ box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5) !important; 
+}
+
+.h1, h1 { text-transform: uppercase;
+    font-size: 20px; margin: 10px auto 20px; font-weight: 400; color:#5BC0DE; letter-spacing: -1px;
+}
+
+h1 strong{
+	font-weight: 700; color:#5BC0DE;    font-size: 25px; letter-spacing: 0px;
+}
+.date{ float: right; margin:5px 10px; color: #ecb843; text-transform: uppercase;}
+
+.jumbotron h1 { width: auto; text-transform: none; background-color: #be1f8a; text-transform:     ;
+    font-size: 20px; margin: 5px auto 10px; font-weight: 700; padding: 10px 10px 5px;
+	 
+}
+
+.col-xs-4 {
+      width: 31%;
+    padding: 2px;
+    margin: 0 0.5%;
+}
+
+.col-xs-4:nth-child(3n+1) {
+	 margin-left:2%; 
+}
+
+.h3, h3 {text-transform: uppercase;
+    font-size: 15px;
+	margin: 5px auto 10px;
+	font-weight: 700;
+}
+
+.thumbnail2, .thumbnail2 img{
+	margin: 0 auto 0;
+	width: 100%;
+}
+
+.caption{ background-color: #591e7f; color: #fff; padding: 5px 5px; text-align: center; height:50px}
+
+
+.thumbnail {
+    display: block;
+    /* padding: 4px; */
+    /* margin-bottom: 20px; */
+    line-height: 1.42857143;
+    background-color: none !important;
+    border: 1px solid #F0AD4E;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+
+.col-lg-12{ text-align: left; border-left: 1px solid #9474c9; margin-left: 20px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;}
+
+footer { margin: 10px auto 5px; padding:20px; color: #9474c9;}
+.relacionados{ padding: 20px; background-color: #370457; min-height:200px;      box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5); }
+
+.tagss{ padding: 20px; background-color:#471bb9;     box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5); }
+/* tags */
+
+hr{ width: 70%; margin: 10px auto; border-top: 1px solid   #9121ac;
+}
+.tags a{border:1px solid #DDD;display:inline-block;color:#717171;background:#FFF;-webkit-box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;-o-transition:all .1s ease-in-out;-ms-transition:all .1s ease-in-out;transition:all .1s ease-in-out;border-radius:2px;margin:0 3px 6px 0;padding:5px 10px}
+.tags a:hover{border-color:#08C;}
+.tags a.primary{color:#FFF;background-color:#428BCA;border-color:#357EBD}
+.tags a.success{color:#FFF;background-color:#5CB85C;border-color:#4CAE4C}
+.tags a.info{color:#FFF;background-color:#5BC0DE;border-color:#46B8DA}
+.tags a.warning{color:#FFF;background-color:#F0AD4E;border-color:#EEA236}
+.tags a.danger{color:#FFF;background-color:#D9534F;border-color:#D43F3A}
+ 
+
+.verde, .azul, .rojo, .amarillo{ padding: 5px 10px 5px; font-size:25px; }
+
+.verde { background-color:#5CB85C; color: #fff;}
+.azul { background-color:#5BC0DE;  color: #fff;}
+.rojo { background-color:#D9534F;  color: #fff;}
+.amarillo { background-color:#F0AD4E;  color: #fff;}
+
+
+ @media screen and (min-width:768px) { 
+  html{width: 500px; margin: 0 auto;}
+	 .container {
+    width: 100%;
+}
+ }

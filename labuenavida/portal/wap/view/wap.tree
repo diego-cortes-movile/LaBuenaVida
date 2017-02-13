@@ -1,0 +1,38 @@
+all="true"
+redirect=index
+
+smart_css_root="portal/wap/view/smart/css"
+smart_js_root="portal/wap/view/smart/js"
+smart_img_root="portal/wap/view/smart/img"
+
+top=content(top)
+banner=content(suscripcion)
+
+index {
+	processor=[processor(validateSubscribedProcessor)]
+	template=template(wap_index)
+}
+
+logueo {
+	processor=processor(logueoProcessor)
+	template=template(wap_logueo)
+}
+
+
+videos {
+	processor=[processor(redirectUnsubscribedProcessor),processor(videosProcessor)]
+	template=template(wap_videos)
+}
+
+login {
+	processor=[processor(login),processor(redirectUnsubscribedProcessor),processor(retoNovoaProcessor)]
+	template=template(wap_retonovoa)
+}
+
+validate {
+	processor=processor(validateProcessor)
+}
+
+ping {
+  processor=processor(PingProcessor)
+}

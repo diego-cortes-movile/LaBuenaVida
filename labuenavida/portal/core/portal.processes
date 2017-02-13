@@ -1,0 +1,7 @@
+wurflUpdater {
+    class="com.compera.portal.process.WURFLResourceUpdaterProcess" 
+
+    wurfl_resource_service_url="http://chub.ti.movile.com/cHub/api/dl/wurfl" 
+    wurfl_resource_dest_path="@DEPLOY_DIR@/WEB-INF/wurfl.zip" 
+    wurfl_update_period_millis="86400000" 
+}

@@ -1,0 +1,4 @@
+wap_index {
+	base_directory="index"
+	any="smart.jsp"
+}
