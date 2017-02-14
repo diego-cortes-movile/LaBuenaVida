@@ -50,7 +50,7 @@ public class VideosProcessor extends Processor {
             Long renewCount = subscription.getRenewCount();
 
             ChubClient chubClient = MovileSdkHolder.getcHubClient();
-            ResourceListResponse resources = chubClient.listResource(subscription.getApplicationId(), renewCount.intValue());
+            ResourceListResponse resources = chubClient.listResource(1039L, renewCount.intValue());
 
             if (resources != null) {
                 request.setAttribute("videos", resources.getResources());

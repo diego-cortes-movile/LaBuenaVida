@@ -56,49 +56,57 @@ public class ValidateSubscribedProcessor extends Processor {
 
         Subscription subscription = null;
         Boolean isSubscribed = null;
-        String msisdn = null;
+
+        // Busca en headers.
+        String msisdn = Util.getPhoneFromHeaders(request);
+
+        if (StringUtils.isNotBlank(msisdn)) {
+            SYSTEM_LOGGER.info("Msisdn encontrado: {}", msisdn);
+        }
 
         // Busca en cookies.
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null && ArrayUtils.isNotEmpty(cookies)) {
-            for (Cookie cookie : cookies) {
-                if ("msisdn".equals(cookie.getName()) || "user".equals(cookie.getName())) {
-                    SYSTEM_LOGGER.info("Msisdn encontrado: {}", cookie.getName());
-                    subscription = SubscriptionBo.getInstance().findSubscription(msisdn);
-                    isSubscribed = (subscription != null) ? true : false;
-                    SYSTEM_LOGGER.info("Esta suscrito en cookies?: {} - Suscripcion: {}", isSubscribed, subscription);
+        if (StringUtils.isBlank(msisdn)) {
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null && ArrayUtils.isNotEmpty(cookies)) {
+                for (Cookie cookie : cookies) {
+                    if ("msisdn".equals(cookie.getName()) || "user".equals(cookie.getName())) {
+                        msisdn = cookie.getName();
+                        SYSTEM_LOGGER.info("Msisdn encontrado en cookies: {}", msisdn);
+                    }
                 }
             }
         }
 
-        // Busca en headers.
-        msisdn = Util.getPhoneFromHeaders(request);
-        if (StringUtils.isNotBlank(msisdn)) {
-            SYSTEM_LOGGER.info("Msisdn encontrado: {}", msisdn);
-            subscription = SubscriptionBo.getInstance().findSubscription(msisdn);
-            isSubscribed = (subscription != null) ? true : false;
-            SYSTEM_LOGGER.info("Esta suscrito: {} - Suscripcion: {}", isSubscribed, subscription);
+        // Busca en parametros.
+        if (StringUtils.isBlank(msisdn)) {
+            if ((isSubscribed == null || !isSubscribed) && (StringUtils.isNotBlank(request.getParameter("msisdn"))
+                    || StringUtils.isNotBlank(request.getParameter("user")) || StringUtils.isNotBlank((String) request.getParameter("dm")))) {
+
+                if (StringUtils.isNotEmpty(request.getParameter("msisdn"))) {
+                    msisdn = request.getParameter("msisdn");
+                } else if (StringUtils.isNotEmpty(request.getParameter("user"))) {
+                    msisdn = request.getParameter("user");
+                } else {
+                    msisdn = String.valueOf(BaseN.BASE64.revertToDecimal((String) request.getParameter("dm")));
+                }
+
+                SYSTEM_LOGGER.info("Msisdn encontrado en req. params: {}", msisdn);
+
+            }
         }
 
-        // Busca en parametros.
-        if ((isSubscribed == null || !isSubscribed) && (StringUtils.isNotBlank(request.getParameter("msisdn"))
-                || StringUtils.isNotBlank(request.getParameter("user")) || StringUtils.isNotBlank((String) request.getParameter("dm")))) {
-
-            if (StringUtils.isNotEmpty(request.getParameter("msisdn"))) {
-                msisdn = request.getParameter("msisdn");
-            } else if (StringUtils.isNotEmpty(request.getParameter("user"))) {
-                msisdn = request.getParameter("user");
-            } else {
-                msisdn = String.valueOf(BaseN.BASE64.revertToDecimal((String) request.getParameter("dm")));
-            }
-
+        if (StringUtils.isBlank(msisdn)) {
+            SYSTEM_LOGGER.info("Msisdn NO encontrado: {}", msisdn);
+            return new RedirectResult(LP_LABUENAVIDA);
+        } else {
             SYSTEM_LOGGER.info("Msisdn encontrado: {}", msisdn);
             subscription = SubscriptionBo.getInstance().findSubscription(msisdn);
             isSubscribed = (subscription != null) ? true : false;
             SYSTEM_LOGGER.info("Esta suscrito?: {} - Suscripcion: {}", isSubscribed, subscription);
         }
 
-        if (isSubscribed == null || !isSubscribed) {
+        if (subscription == null || !isSubscribed) {
+            SYSTEM_LOGGER.info("Suscripcion NO encontrada: {}", subscription);
             return new RedirectResult(LP_LABUENAVIDA);
         }
 
