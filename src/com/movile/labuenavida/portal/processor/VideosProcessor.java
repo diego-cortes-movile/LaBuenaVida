@@ -4,15 +4,11 @@
 package com.movile.labuenavida.portal.processor;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,13 +18,8 @@ import com.compera.portal.processor.result.ProcessorResult;
 import com.compera.portal.processor.result.SuccessResult;
 import com.movile.labuenavida.enums.MessageKey;
 import com.movile.labuenavida.exception.LaBuenaVidaException;
-import com.movile.labuenavida.to.SeasonInfo;
-import com.movile.labuenavida.util.Constants;
 import com.movile.labuenavida.util.MovileSdkHolder;
-import com.movile.labuenavida.videos.VideoPublisher;
-import com.movile.labuenavida.videos.to.VideoResourceTO;
 import com.movile.sdk.services.chub.ChubClient;
-import com.movile.sdk.services.chub.model.Resource;
 import com.movile.sdk.services.chub.model.ResourceListResponse;
 import com.movile.sdk.services.sbs.model.Subscription;
 

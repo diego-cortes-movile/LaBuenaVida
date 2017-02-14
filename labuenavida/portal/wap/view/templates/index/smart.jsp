@@ -8,7 +8,7 @@
 	
 		<c:if test="${empty videos}">
 			<div class="verde"></div>
-			<h1> Próximamente encontrarás contenido sobre este tema.</h1>
+			<h1> Pr&oacute;ximamente encontrar&aacute;s contenido sobre este tema.</h1>
 		</c:if>
 		
 		<c:if test="${not empty videos}">
@@ -40,7 +40,7 @@
 		<h1>Videos Relacionados</h1>
 		<c:if test="${empty videos}">
 			<div class="verde"></div>
-			<h1> Próximamente encontrarás contenido sobre este tema.</h1>
+			<h1> Pr&oacute;ximamente encontrar&aacute;s contenido sobre este tema.</h1>
 		</c:if>
 		<c:if test="${not empty videos}">
 			<div class="row">
