@@ -6,6 +6,7 @@ smart_js_root="portal/wap/view/smart/js"
 smart_img_root="portal/wap/view/smart/img"
 
 index {
+	videoResolution="pd_low"
 	processor=[processor(validateSubscribedProcessor),processor(videosProcessor)]
 	template=template(wap_index)
 }
