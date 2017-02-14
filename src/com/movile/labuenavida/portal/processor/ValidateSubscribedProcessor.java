@@ -70,7 +70,7 @@ public class ValidateSubscribedProcessor extends Processor {
             if (cookies != null && ArrayUtils.isNotEmpty(cookies)) {
                 for (Cookie cookie : cookies) {
                     if ("msisdn".equals(cookie.getName()) || "user".equals(cookie.getName())) {
-                        msisdn = cookie.getName();
+                        msisdn = cookie.getValue();
                         SYSTEM_LOGGER.info("Msisdn encontrado en cookies: {}", msisdn);
                     }
                 }
@@ -79,8 +79,8 @@ public class ValidateSubscribedProcessor extends Processor {
 
         // Busca en parametros.
         if (StringUtils.isBlank(msisdn)) {
-            if ((isSubscribed == null || !isSubscribed) && (StringUtils.isNotBlank(request.getParameter("msisdn"))
-                    || StringUtils.isNotBlank(request.getParameter("user")) || StringUtils.isNotBlank((String) request.getParameter("dm")))) {
+            if (StringUtils.isNotBlank(request.getParameter("msisdn")) || StringUtils.isNotBlank(request.getParameter("user"))
+                    || StringUtils.isNotBlank((String) request.getParameter("dm"))) {
 
                 if (StringUtils.isNotEmpty(request.getParameter("msisdn"))) {
                     msisdn = request.getParameter("msisdn");
