@@ -7,15 +7,22 @@ package com.movile.labuenavida.enums;
  */
 public enum Categories {
 
-    MEJORAR("Mejorar"), SALOMON("Salom&oacute;n"), CUIDARTE("Cuidarte"), DISFRUTAR("Disfrutar");
+    MEJORAR(2328L, "Mejorar"), SALOMON(2329L, "Salom&oacute;n"), CUIDARTE(2330L, "Cuidarte"), DISFRUTAR(2331L, "Disfrutar");
 
-    private String category;
+    private Long id;
+    private String description;
 
-    private Categories(String category) {
-        this.category = category;
+    private Categories(Long id, String description) {
+        this.id = id;
+        this.description = description;
     }
 
-    public String getCategory() {
-        return category;
+    public Long getId() {
+        return id;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
 }

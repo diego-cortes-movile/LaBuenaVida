@@ -4,11 +4,13 @@
 package com.movile.labuenavida.portal.processor;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,11 +18,10 @@ import com.compera.portal.parser.bean.Item;
 import com.compera.portal.processor.Processor;
 import com.compera.portal.processor.result.ProcessorResult;
 import com.compera.portal.processor.result.SuccessResult;
+import com.movile.labuenavida.bo.ChubBO;
 import com.movile.labuenavida.enums.MessageKey;
 import com.movile.labuenavida.exception.LaBuenaVidaException;
-import com.movile.labuenavida.util.MovileSdkHolder;
-import com.movile.sdk.services.chub.ChubClient;
-import com.movile.sdk.services.chub.model.ResourceListResponse;
+import com.movile.sdk.services.chub.model.Resource;
 import com.movile.sdk.services.sbs.model.Subscription;
 
 /**
@@ -49,13 +50,16 @@ public class VideosProcessor extends Processor {
 
             Long renewCount = subscription.getRenewCount();
 
-            ChubClient chubClient = MovileSdkHolder.getcHubClient();
-            ResourceListResponse resources = chubClient.listResource(1039L, renewCount.intValue());
+            List<Resource> allVideos = ChubBO.getInstace().getAllVideosFromAllCategories();
+            SYSTEM_LOGGER.info("Todos los videos: {}", allVideos);
 
-            if (resources != null) {
-                request.setAttribute("videos", resources.getResources());
-                request.setAttribute("videoActual", resources.getResources().get(0));
-            }
+            Resource videoActual = this.getActualVideo(allVideos, renewCount);
+            SYSTEM_LOGGER.info("Video actual: {}", videoActual);
+
+            // request.setAttribute("videos", resources.getResources());
+
+            request.setAttribute("videoActual", videoActual);
+
 
         } catch (LaBuenaVidaException e) {
             SYSTEM_LOGGER.error("Error procesando el video: {}", e.getMessage());
@@ -64,6 +68,27 @@ public class VideosProcessor extends Processor {
         }
 
         return new SuccessResult();
+    }
+
+    /**
+     * Obtiene el video actual segun el numero de cobros.
+     * 
+     * @param allVideos Todos los videos.
+     * @param renewCount Numero de cobros hechos.
+     * @return El video encontrado.
+     */
+    private Resource getActualVideo(List<Resource> allVideos, Long renewCount) {
+
+        Resource video = null;
+
+        for (Resource vid : allVideos) {
+            String diaX = vid.getDescription().replace(" ","").substring(3);
+            if (NumberUtils.isDigits(diaX) && renewCount == Long.parseLong(diaX)) {
+                video = vid;
+                break;
+            }
+        }
+        return video;
     }
 
 }

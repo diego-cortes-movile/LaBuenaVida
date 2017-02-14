@@ -6,12 +6,12 @@
 	<!-- Jumbotron Header -->
 	<header class="jumbotron hero-spacer">
 	
-		<c:if test="${empty videos}">
+		<c:if test="${empty videoActual}">
 			<div class="verde"></div>
 			<h1> Pr&oacute;ximamente encontrar&aacute;s contenido sobre este tema.</h1>
 		</c:if>
 		
-		<c:if test="${not empty videos}">
+		<c:if test="${not empty videoActual}">
 			<div class="verde"></div>
 			<h1>${videoActual.name}</h1>
 			<strong class="date">D&iactue;a 1</strong>
