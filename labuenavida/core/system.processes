@@ -83,7 +83,7 @@ channelLoader {
 	extension=".channel"
 	interval="20000"
 	log="channel.loader"
-} 
+}
 
 templateLoader {
 	class="com.compera.portal.template.TemplateLoaderProcess"
@@ -93,6 +93,3 @@ templateLoader {
 	interval="20000"
 	log="template.loader"
 }
-
-
-		
