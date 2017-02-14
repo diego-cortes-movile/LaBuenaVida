@@ -127,7 +127,7 @@ public class VideosProcessor extends Processor {
             String previewImg = children.path("data").path("previews").path("img_590").getValueAsText();
             String name = children.path("data").path("name").getValueAsText();
             String description = children.path("data").path("description").getValueAsText();
-            String seasonCategoryId = actualObj.path("body").path("data").path("categoryId").getValueAsText();
+            String category = actualObj.path("body").path("data").path("categories").getValueAsText();
 
             video = new VideoResourceTO();
             video.setId(id);
@@ -135,7 +135,7 @@ public class VideosProcessor extends Processor {
             video.setPreviewImg(previewImg);
             video.setName(name);
             video.setDescription(description);
-            video.setSeasonCategoryId(seasonCategoryId);
+            video.setSeasonCategoryId(category);
 
         } catch (Exception e) {
             EXCEPTION_LOGGER.error("Error listing the videos for application=" + application + ", resourceId=" + resourceId + "", e);
