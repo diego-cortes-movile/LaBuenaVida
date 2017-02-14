@@ -1,13 +1,9 @@
-videosProcessor {
-	class="com.movile.labuenavida.portal.processor.VideosProcessor"
-}
-
 validateSubscribedProcessor {
 	class="com.movile.labuenavida.portal.processor.ValidateSubscribedProcessor"
 }
 
-redirectUnsubscribedProcessor {
-	class="com.movile.labuenavida.portal.processor.RedirectUnsubscribedProcessor"
+videosProcessor {
+	class="com.movile.labuenavida.portal.processor.VideosProcessor"
 }
 
 PingProcessor {

@@ -12,20 +12,34 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.compera.portal.parser.bean.Item;
 import com.compera.portal.processor.Processor;
 import com.compera.portal.processor.result.ProcessorResult;
 import com.compera.portal.processor.result.SuccessResult;
+import com.movile.labuenavida.enums.MessageKey;
+import com.movile.labuenavida.exception.LaBuenaVidaException;
 import com.movile.labuenavida.to.SeasonInfo;
 import com.movile.labuenavida.util.Constants;
+import com.movile.labuenavida.util.MovileSdkHolder;
 import com.movile.labuenavida.videos.VideoPublisher;
 import com.movile.labuenavida.videos.to.VideoResourceTO;
+import com.movile.sdk.services.chub.ChubClient;
+import com.movile.sdk.services.chub.model.Resource;
+import com.movile.sdk.services.chub.model.ResourceListResponse;
+import com.movile.sdk.services.sbs.model.Subscription;
 
 /**
- * @author Peter Escamilla (peter.escamilla@movile.com)
+ * @author Yvan Lopez (yvan.lopez@movile.com)
  *
  */
 public class VideosProcessor extends Processor {
+
+    private static final Logger SYSTEM_LOGGER = LoggerFactory.getLogger("system");
+    private static final Logger EXCEPTION_LOGGER = LoggerFactory.getLogger("exception");
 
     @Override
     public void initiate(Item item) {}
@@ -35,23 +49,28 @@ public class VideosProcessor extends Processor {
 
     @Override
     public ProcessorResult process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<VideoResourceTO> videos = VideoPublisher.getAllVideos(Constants.SHOW_INFO.getCurrentSeason().getVideosCategoryId(), Constants.APPLICATION_ID);
-        request.setAttribute("videos", videos);
+        try {
 
-        List<List<VideoResourceTO>> videosOtherSeasons = new ArrayList<List<VideoResourceTO>>();
-        List<String> stylesOtherSeasons = new ArrayList<String>();
-
-        for (SeasonInfo season : Constants.SHOW_INFO.getSeasons()) {
-            if (!Constants.SHOW_INFO.getCurrentSeason().getVideosCategoryId().equals(season.getVideosCategoryId())) {
-                videos = VideoPublisher.getAllVideos(season.getVideosCategoryId(), Constants.APPLICATION_ID);
-                Collections.shuffle(videos);
-                videosOtherSeasons.add(videos.subList(0, 5));
-                stylesOtherSeasons.add(season.getExclusiveCssClass() + "|" + season.getExclusiveImage());
+            Subscription subscription = (Subscription) request.getAttribute("subscription");
+            if (subscription == null) {
+                throw new LaBuenaVidaException(MessageKey.EMPTY_SUBSCRIPTION);
             }
-        }
 
-        request.setAttribute("videosOtherSeasons", videosOtherSeasons);
-        request.setAttribute("stylesOtherSeasons", stylesOtherSeasons);
+            Long renewCount = subscription.getRenewCount();
+
+            ChubClient chubClient = MovileSdkHolder.getcHubClient();
+            ResourceListResponse resources = chubClient.listResource(subscription.getApplicationId(), renewCount.intValue());
+
+            if (resources != null) {
+                request.setAttribute("videos", resources.getResources());
+                request.setAttribute("videoActual", resources.getResources().get(0));
+            }
+
+        } catch (LaBuenaVidaException e) {
+            SYSTEM_LOGGER.error("Error procesando el video: {}", e.getMessage());
+        } catch (Exception e) {
+            EXCEPTION_LOGGER.error("Error en el sistema: {}", e.getMessage());
+        }
 
         return new SuccessResult();
     }

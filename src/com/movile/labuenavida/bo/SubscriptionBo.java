@@ -40,15 +40,16 @@ public class SubscriptionBo {
 
         PropertiesConfiguration properties = ConfigurationProvider.getApplicationProperties();
         Long applicationId = properties.getLong("sbs.application.id");
-        String referenceId = properties.getString("sbs.reference.id");
+        //String referenceId = properties.getString("sbs.reference.id");
         Carrier carrier = Carrier.getById(properties.getString("sbs.carrier.id"));
 
         Long phoneNumber = Util.formatMsisdn(msisdn, carrier);
 
+        // Obtiene el profile sin el ReferenceId.
         ProfileRequest profileRequest = new ProfileRequest(phoneNumber.toString());
         profileRequest.setCarrierId(carrier.getId());
         profileRequest.setApplicationId(applicationId);
-        profileRequest.setReferenceId(referenceId);
+        //profileRequest.setReferenceId(referenceId);
 
         Subscription subscription = null;
         ProfileResponse response = MovileSdkHolder.getSbsClient().getSubscriptionClient().profile(profileRequest);

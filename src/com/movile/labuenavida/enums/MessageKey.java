@@ -9,7 +9,8 @@ public enum MessageKey {
 
     EMPTY_MSISDN("empty.msisdn"),
     INVALID_MSISDN("invalid.msisdn"),
-    INVALID_CARRIER("invalid.carrier");
+    INVALID_CARRIER("invalid.carrier"), 
+    EMPTY_SUBSCRIPTION("empty.subscription");
 
     private String key;
 

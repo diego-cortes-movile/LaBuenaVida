@@ -5,19 +5,10 @@ smart_css_root="portal/wap/view/smart/css"
 smart_js_root="portal/wap/view/smart/js"
 smart_img_root="portal/wap/view/smart/img"
 
-top=content(top)
-banner=content(suscripcion)
-
 index {
-	processor=[processor(validateSubscribedProcessor)]
+	processor=[processor(validateSubscribedProcessor),processor(videosProcessor)]
 	template=template(wap_index)
 }
-
-videos {
-	processor=[processor(redirectUnsubscribedProcessor),processor(videosProcessor)]
-	template=template(wap_videos)
-}
-
 
 ping {
 	processor=processor(PingProcessor)

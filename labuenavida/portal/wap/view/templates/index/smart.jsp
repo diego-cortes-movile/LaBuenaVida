@@ -5,13 +5,23 @@
 <div>
 	<!-- Jumbotron Header -->
 	<header class="jumbotron hero-spacer">
-		<div class="amarillo">Mejorar</div>
-		<h1>Finanzas para Ni&ntilde;os</h1>
-		<strong class="date">Día 1</strong>
-		<video id="player1" width="100%" height="" type="video/mp4" controls preload="none"
-			src="http://pd.videos.movile.com/core-media/vod/bc538e50-e98a-11e6-b9fb-0a144db7f1bc_bitrate_400.mp4"
-			poster="https://s3.amazonaws.com/zeewetv-wowza-content/core-media/img/bc538e50-e98a-11e6-b9fb-0a144db7f1bc_590.png">
-		</video>
+	
+		<c:if test="${empty videos}">
+			<div class="verde"></div>
+			<h1> Próximamente encontrarás contenido sobre este tema.</h1>
+		</c:if>
+		
+		<c:if test="${not empty videos}">
+			<div class="verde"></div>
+			<h1>${videoActual.name}</h1>
+			<strong class="date">D&iactue;a 1</strong>
+			<video id="player1" width="100%" height="" type="video/mp4" controls preload="none"
+				src="${videoActual.downloadUrl}"
+				poster="${videoActual.previewImg }">
+			</video>
+		</c:if>
+		
+		
 	</header>
 
 	<!-- Title -->
@@ -28,7 +38,29 @@
 	<!-- Relacionados --->
 	<section class="container relacionados">
 		<h1>Videos Relacionados</h1>
-		<div class="col-lg-12">Pr&oacute;ximamente encontrar&aacute;s m&aacute;s contenido sobre este tema.</div>
+		<c:if test="${empty videos}">
+			<div class="verde"></div>
+			<h1> Próximamente encontrarás contenido sobre este tema.</h1>
+		</c:if>
+		<c:if test="${not empty videos}">
+			<div class="row">
+				
+				<c:forEach items="${videos}" var="vid">
+					<div class="col-lg-4 col-md-4 col-xs-4">
+	               <a href="#">
+	                   <div class="thumbnail2">
+	                    <img src="${vid.previewImg}" alt="">
+	                    <div class="caption">${vid.name}</div>
+	                </div>
+	                 </a>
+	            </div>
+				</c:forEach>
+				
+	            
+	            
+            </div>
+		</c:if>
+		
 		<!-- /.row -->
 	</section>
 
