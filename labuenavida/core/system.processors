@@ -54,9 +54,3 @@ accessLogger {
 	url_rules=[notMatches("\Qmanager\E.*")]
 	previous_result_rules="any" 
 }
-
-googleAnalitycs {
-	class="com.movile.labuenavida.portal.processor.GoogleAnalyticsFilter"
-	order_rules=[after(deviceIdentifier), after(userIdentifier)]
-	url_rules=[notMatches(".*\.(css|gif|jpg|jpeg|swf|flv|mp3|mp4|pdf|ico|png|js)")]
-}
