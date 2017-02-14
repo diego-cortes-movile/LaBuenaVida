@@ -2,7 +2,7 @@
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:noNamespaceSchemaLocation="logback.xsd">
 
-    <property name="LOG_PATH" value="/movile-logs/tomcat-7.0.26-port8082/labuenavida/" />
+    <property name="LOG_PATH" value="/movile-logs/tomcat-7.0.26-port8082/inventor/" />
     <property name="DEFAULT_PATTERN" value="%highlight([%-5level]) %magenta([%date{ISO8601}] [%X{stamp}] [%class->%method:%line]) | %msg%n" />
     <property name="THREAD_PATTERN" value="%highlight([%-5level]) %magenta([%date{ISO8601}] [%X{stamp}] [%class[%thread]->%method:%line]) | %msg%n" />
     <property name="EXCEPTION_PATTERN" value="%highlight([%-5level]) %magenta([%date{ISO8601}] [%X{stamp}] [%class->%method:%line]) [Exception %msg - Thread Id %thread - Start]%n%xException{8}%n[Exception %msg - End]%n" />
