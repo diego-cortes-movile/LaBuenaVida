@@ -15,7 +15,6 @@ public class MovileSdkHolder {
     private static MovileSdkHolder instance = new MovileSdkHolder();
 
     private SBSClient sbsClient;
-    private SmartChannelClient smartChannelClient;
     private ChubClient cHubClient;
 
     private MovileSdkHolder() {}
@@ -23,16 +22,11 @@ public class MovileSdkHolder {
     public static void initialize() {
         MovileSDK movileSDK = new MovileSDK("movile-sdk.properties");
         instance.sbsClient = movileSDK.getSBS();
-        instance.smartChannelClient = movileSDK.getSmartChannelClient();
         instance.cHubClient = movileSDK.getChub();
     }
 
     public static SBSClient getSbsClient() {
         return instance.sbsClient;
-    }
-
-    public static SmartChannelClient getSmartChannelClient() {
-        return instance.smartChannelClient;
     }
 
     public static ChubClient getcHubClient() {

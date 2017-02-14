@@ -1,13 +1,5 @@
-imagesRandomProcessor {
-	class="com.movile.labuenavida.portal.processor.ImagesRandomProcessor"
-}
-
 videosProcessor {
 	class="com.movile.labuenavida.portal.processor.VideosProcessor"
-}
-
-login {
-	class="com.movile.labuenavida.portal.processor.SetMsisdnProcessor"
 }
 
 validateSubscribedProcessor {
@@ -18,26 +10,6 @@ redirectUnsubscribedProcessor {
 	class="com.movile.labuenavida.portal.processor.RedirectUnsubscribedProcessor"
 }
 
-logueoProcessor {
-	class="com.movile.labuenavida.portal.processor.LogueoProcessor"
-}
-
-validateProcessor {
-	class="com.movile.labuenavida.portal.processor.ValidateProcessor"
-}
-
-detrasimagenesProcessor {
-	class="com.movile.labuenavida.portal.processor.DetrasImagenesProcessor"
-}
-
-detrasvideosProcessor {
-	class="com.movile.labuenavida.portal.processor.DetrasVideosProcessor"
-}
-
-detrasDeCamarasProcessor {
-	class="com.movile.labuenavida.portal.processor.DetrasDeCamarasProcessor"
-}
-
 PingProcessor {
-  class="com.movile.labuenavida.portal.processor.PingProcessor"
+	class="com.movile.labuenavida.portal.processor.PingProcessor"
 }

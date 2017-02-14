@@ -13,26 +13,12 @@ index {
 	template=template(wap_index)
 }
 
-logueo {
-	processor=processor(logueoProcessor)
-	template=template(wap_logueo)
-}
-
-
 videos {
 	processor=[processor(redirectUnsubscribedProcessor),processor(videosProcessor)]
 	template=template(wap_videos)
 }
 
-login {
-	processor=[processor(login),processor(redirectUnsubscribedProcessor),processor(retoNovoaProcessor)]
-	template=template(wap_retonovoa)
-}
-
-validate {
-	processor=processor(validateProcessor)
-}
 
 ping {
-  processor=processor(PingProcessor)
+	processor=processor(PingProcessor)
 }
