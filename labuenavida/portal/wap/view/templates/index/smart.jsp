@@ -12,9 +12,9 @@
 		</c:if>
 		
 		<c:if test="${not empty videoActual}">
-			<div class="verde"></div>
+			<div class="verde">${videoActual.seasonCategoryId}</div>
 			<h1>${videoActual.name}</h1>
-			<strong class="date">D&iactue;a 1</strong>
+			<strong class="date">${videoActual.description}</strong>
 			<video id="player1" width="100%" height="" type="video/mp4" controls preload="none"
 				src="${videoActual.downloadUrl}"
 				poster="${videoActual.previewImg }">
